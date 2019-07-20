@@ -71,3 +71,22 @@ Firmware types: 0 = Main; 1 = Bootloader; 2 = Hardware
 MX Master (50%): 04 04 c0 28 0a
 
 T400 (80%): 04 00 c0 b4 0a
+
+## 0x1b00: Reprogram controls
+### Function 0: Get number of buttons
+**Returns:** Byte 0: Number of buttons
+### Function 1: Get button info
+**Arguments:** Byte 0: Button index
+
+**Returns:** Byte 0: Control ID MSB; Byte 1: Control ID LSB; Byte 2: Task ID MSB; Byte 3: Task ID LSB; Byte 4: Flags; Byte 5: Position (if F key, else 0); Byte 6: Group; Byte 7: Group remap mask (bit no. corresponds to group no.); Byte 8: Can be reprogrammed as Gesture button
+
+**Flags:** Bit 7: virtual; Bit 6: persistent divert; Bit 5: temporary divert; Bit 4: Reprogrammable; Bit 3: Affected by Fn Toggling; Bit 2: Hotkey; Bit 1: Function key; Bit 0: Mouse button
+### Function 2: ???
+**Arguments:** Byte 0: ???
+
+**Returns:** Byte 0: Argument Byte 0
+
+### Function 3: ???
+**Arguments:** Byte 0: ???
+
+**Returns:** Byte 0: Argument Byte 0
