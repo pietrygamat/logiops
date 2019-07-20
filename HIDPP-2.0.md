@@ -13,6 +13,9 @@ _This feature ID on the device will always be 0._
 
 **Target SW:** Bit 7: SW defined by feature 0x0030; Bit 3-6 are unused; Bit 2: Preference Manager; Bit 1: Gaming Software; Bit 0: Device Manager
 
+### Event 0: No operation
+Sent to prevent device from entering low power mode.
+
 ## 0x0001: Feature set
 ### Function 0: Get number of features
 **Returns:** Byte 0: Number of features
@@ -58,3 +61,13 @@ Firmware types: 0 = Main; 1 = Bootloader; 2 = Hardware
 #### Function 0: Returns part 1 of crypto identifier?
 #### Function 1: Returns part 2 of crypto identifier?
 #### Function 2: Generates new crypto identifier?
+
+## 0x1000: Battery status
+### Function 0: Get battery percentage?
+**Returns:** Byte 0: Battery percentage, Byte 1: ???, Byte 2: Charging flag
+### Function 1: ???
+**Returns:** Byte 0-4: ???
+#### Sample Device Outputs
+MX Master (50%): 04 04 c0 28 0a
+
+T400 (80%): 04 00 c0 b4 0a
