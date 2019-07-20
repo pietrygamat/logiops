@@ -110,4 +110,4 @@ Same as 0x1b00 function 1
 ### Event 0: Diverted button state change
 **Returns:** Array of 0-4 16-bit CIDs
 ### Event 1: Diverted Raw XY state change
-**Returns:** Byte 0: Δx MSB; Byte 1: Δx LSB; Byte 2: Δy MSB; Byte 3: Δy LSB
+**Returns:** Byte 0: dx MSB; Byte 1: dx LSB; Byte 2: dy MSB; Byte 3: dy LSB
