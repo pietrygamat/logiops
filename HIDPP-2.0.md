@@ -90,3 +90,24 @@ T400 (80%): 04 00 c0 b4 0a
 **Arguments:** Byte 0: ???
 
 **Returns:** Byte 0: Argument Byte 0
+
+## 0x1b03: Reprogram controls v3
+Exact same as 0x1b00?
+## 0x1b04: Reprogram controls v4
+### Function 0: Get number of buttons
+Same as 0x1b00 function 0
+### Function 1: Get button info
+Same as 0x1b00 function 1
+### Function 2: Get CID reporting info
+**Arguments:** Byte 0: CID MSB; Byte 1: CID LSB
+
+**Returns:** Byte 0: CID MSB; Byte 1: CID LSB; Byte 2: Divert Flags [---R-P-T] (R is raw XY, P is persistent, T is temporary); Byte 3: Remap CID MSB; Byte 4: Remap CID LSB
+### Function 3: Set CID reporting
+**Arguments:** Byte 0: CID MSB; Byte 1: CID LSB; Byte 2: Divert Flags [---URUPUT] (U updates the flag to the right if set, R is raw XY, P is persistent, T is temporary); Byte 3: Remap CID MSB; Byte 4: Remap CID LSB
+
+**Returns:** Echoes parameters
+
+### Event 0: Diverted button state change
+**Returns:** Array of 0-4 16-bit CIDs
+### Event 1: Diverted Raw XY state change
+**Returns:** Byte 0: Δx MSB; Byte 1: Δx LSB; Byte 2: Δy MSB; Byte 3: Δy LSB
