@@ -40,3 +40,21 @@ If the feature ID is a newer version of another feature, it should return the fe
 **Returns:** Byte 0: Firmware type; Byte 1-3: ASCII Firmware Prefix; Byte 4: Firmware Number; Byte 5: Revision; Byte 6-7: Build Number; Byte 8: Active entity; Byte 9-10: PID; Byte 11-15: Extra versioning info
 
 Firmware types: 0 = Main; 1 = Bootloader; 2 = Hardware
+
+## 0x0005: Device name
+### Function 0: Get length
+**Returns:** Byte 0: Length of device name
+
+### Function 1: Get device name
+**Arguments:** Byte 0: Character index
+
+**Returns:** 16 bytes of the device name as a null-terminated string starting from the given index
+
+## 0x0020: Reset
+#### Function 0: Nothing?
+#### Function 1: Reset to default settings
+
+## 0x0021: Crypto identifier
+#### Function 0: Returns part 1 of crypto identifier?
+#### Function 1: Returns part 2 of crypto identifier?
+#### Function 2: Generates new crypto identifier?
