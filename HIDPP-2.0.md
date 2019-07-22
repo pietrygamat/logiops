@@ -92,7 +92,10 @@ T400 (80%): 04 00 c0 b4 0a
 **Returns:** Byte 0: Argument Byte 0
 
 ## 0x1b03: Reprogram controls v3
-Exact same as 0x1b00?
+Refer to 0x1b00 for functions
+### Event 0: Diverted button state change
+**Returns:** Array of 0-4 16-bit CIDs?
+
 ## 0x1b04: Reprogram controls v4
 ### Function 0: Get number of buttons
 Same as 0x1b00 function 0
