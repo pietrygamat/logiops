@@ -105,6 +105,8 @@ This mode does nothing. The `action` field is ignored when this mode is used.
 This mode presses and releases an action when the gesture button is released
 ##### OnFewPixels
 This mode presses and releases an action after the mouse is moved every n pixels (where n is the integer field `pixels`).
+##### Axis
+This mode maps a gesture movement to an axis. The axis is defined as a string (e.g. "REL_WHEEL") in the `axis` field and the multiplier for its movement is defined in the `axis_multiplier` field. For a list of axis strings, refer to [linux/input-event-codes.h](https://github.com/torvalds/linux/blob/master/include/uapi/linux/input-event-codes.h). 
 
 #### action
 This is a mandatory field that defines the action the gesture uses. This can be any action other than `Gestures`. Refer to the entire Actions section for more details.
