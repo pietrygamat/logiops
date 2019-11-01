@@ -1,6 +1,6 @@
 # DISCALIMER: The configuration file is a work in progress and is subject to change.
 
-Logid uses a standard libconfig-style config file called `logid.cfg` in the working directory.
+Logid uses a standard libconfig-style config file stored in `/etc/logid.cfg` by default (although you launch logid with the -c option to change it).
 
 `:` and `=` are used for defining variables and are interchangeable. (e.g. `name: "foo";` is the same as `name = "foo";`)
 
@@ -12,7 +12,7 @@ e.g. `devices: ( { device object }, { device object } ... );`
 ## Device Object
 The following are a list of fields that a device object contains.
 ### name
-This is a required string field that defines the name of the device. To get the name of the device, check the device detection messages from logid. (e.g. `name: "MX Master";`)
+This is a required string field that defines the name of the device. To get the name of the device, launch logid with the device connected and it should print out a message with the device name. (e.g. `name: "MX Master";`)
 
 ### buttons
 This is an optional array field that defines the mappings for buttons.
@@ -89,7 +89,7 @@ This action disables mouse movement while the button is pressed and allows you t
 ### gestures
 This is a required array of gesture objects that map a direction to a gesture mode and an action.
 
-e.g. `buttons: ( { gesture object }, { gesture object } ... );`
+e.g. `gestures: ( { gesture object }, { gesture object } ... );`
 
 #### direction
 This is a required string field in a gesture object that defines the direction of the gesture. (e.g. `direction: "Up"`)
