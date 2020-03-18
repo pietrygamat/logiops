@@ -2,6 +2,8 @@
 
 Logid uses a standard libconfig-style config file stored in `/etc/logid.cfg` by default (although you launch logid with the -c option to change it).
 
+For a sample config, see [logid.example.cfg](https://github.com/PixlOne/logiops/blob/master/logid.example.cfg).
+
 `:` and `=` are used for defining variables and are interchangeable. (e.g. `name: "foo";` is the same as `name = "foo";`)
 
 # Defining Devices
