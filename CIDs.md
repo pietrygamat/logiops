@@ -41,7 +41,7 @@ Here's a list of control IDs and their corresponding functions.
 | 0x00d4     | Search                 |
 | 0x00d5     | Home                   |
 | 0x00d6     | Menu                   |
-| 0x00d7     | Windows Navigation?    |
+| 0x00d7     | Switch Receivers       |
 | 0x00dd     | Select Language        |
 | 0x00e0     | Task View              |
 | 0x00e1     | Action Center          |
