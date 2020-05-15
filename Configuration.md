@@ -88,6 +88,8 @@ This is a required string array field that defines the keys to be pressed/releas
 ## Gestures
 This action disables mouse movement while the button is pressed and allows you to assign actions for each direction. The possible directions are `Up`, `Down`, `Left`, `Right`, and `None`.
 
+Note that any button can be used as a gesture button if the device supports gestures.
+
 ### gestures
 This is a required array of gesture objects that map a direction to a gesture mode and an action.
 
