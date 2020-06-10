@@ -72,6 +72,14 @@ MX Master (50%): 04 04 c0 28 0a
 
 T400 (80%): 04 00 c0 b4 0a
 
+## 0x1814: Change host
+### Function 0: Get host information
+**Returns:** Byte 0: Number of supported hosts, Byte 1: Current host (zero-indexed)
+### Function 1: Set host
+**Arguments:** Byte 0: Host to switch to (zero-indexed)
+
+**Returns:** Connection terminates.
+
 ## 0x1b00: Reprogram controls
 ### Function 0: Get number of buttons
 **Returns:** Byte 0: Number of buttons
