@@ -6,6 +6,13 @@ For a sample config, see [logid.example.cfg](https://github.com/PixlOne/logiops/
 
 `:` and `=` are used for defining variables and are interchangeable. (e.g. `name: "foo";` is the same as `name = "foo";`)
 
+# Blacklisting Devices
+Devices can be blacklisted from being used in logid. To blacklist a device, create a field called `blacklist` as an array of the PIDs of the devices you want to blacklist.
+
+e.g. `blacklist: [0x00a7]`
+
+**Workaround Note:** To prevent logid from crashing with a Logitech G PRO headset, PID 0x00a7 must be blacklisted. This isssue will be fixed in a later update.
+
 # Defining Devices
 Devices are defined in an array field called `devices`. This array consists of objects that define a device.
 
