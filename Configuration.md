@@ -92,6 +92,8 @@ This maps press and release events of a button to a list of keys/buttons.
 ### keys
 This is a required string array field that defines the keys to be pressed/released. For a list of key/button strings, refer to [linux/input-event-codes.h](https://github.com/torvalds/linux/blob/master/include/uapi/linux/input-event-codes.h). (e.g. `keys: ["KEY_A", "KEY_B"];`)
 
+Please note that these event codes work in a US (QWERTY) keyboard layout. If you have a locale set that does not use this keyboard layout, please map it to whatever key it would be on a QWERTY keyboard. (e.g. "KEY_Z" on a QWERTZ layout should be "KEY_Y")
+
 ## Gestures
 This action disables mouse movement while the button is pressed and allows you to assign actions for each direction. The possible directions are `Up`, `Down`, `Left`, `Right`, and `None`.
 
