@@ -151,6 +151,12 @@ This is an integer array field that defines what to increase the DPI by.
 ### sensor
 See the CycleDPI `sensor` field.
 
+## ChangeHost
+This action changes the host to a specified host if the device supports changing hosts.
+
+### host
+This field may either be an integer representing the host number (one-indexed, as shown on the bottom of the mouse), "next" to go to the next host number, or "prev"/"previous" to go to the previous host number. (e.g. `host = 2;` or `host = "next";`).
+
 # Miscellaneous
 
 ### workers
