@@ -6,12 +6,10 @@ For a sample config, see [logid.example.cfg](https://github.com/PixlOne/logiops/
 
 `:` and `=` are used for defining variables and are interchangeable. (e.g. `name: "foo";` is the same as `name = "foo";`)
 
-# Blacklisting Devices
-Devices can be blacklisted from being used in logid. To blacklist a device, create a field called `blacklist` as an array of the PIDs of the devices you want to blacklist.
+# Ignoring Devices
+Devices can be ignored from being detected and used in logid. To ignore a device, create a field called `ignore` as an array of the PIDs of the devices you want to ignore.
 
-e.g. `blacklist: [0x00a7]`
-
-**Workaround Note:** To prevent logid from crashing with a Logitech G PRO headset, PID 0x00a7 must be blacklisted. This isssue will be fixed in a later update.
+e.g. `ignore: [0x00a7]`
 
 # Defining Devices
 Devices are defined in an array field called `devices`. This array consists of objects that define a device.
@@ -37,7 +35,9 @@ This is a required object field that defines the new action of the button. (e.g.
 Refer to the actions section for more information.
 
 ### dpi
-This is an optional integer field that defines the DPI for a mouse that supports adjustable DPI. (e.g. `dpi: 1000;`)
+This is an optional integer/array field that defines the DPI for a mouse that supports adjustable DPI. (e.g. `dpi: 1000;`)
+
+If your mouse has multiple sensors, you may define separate DPIs for those sensors by using an array and placing the value in the sensor's index (e.g. sensor 0: 1000 dpi, sensor 1: 800 dpi -> `dpi: [1000, 800]`)
 
 ### smartshift
 This is an optional object field that defines the SmartShift settings for a mouse that supports it.
@@ -90,7 +90,7 @@ This does nothing. There are no additional fields.
 ## Keypress
 This maps press and release events of a button to a list of keys/buttons.
 ### keys
-This is a required string array field that defines the keys to be pressed/released. For a list of key/button strings, refer to [linux/input-event-codes.h](https://github.com/torvalds/linux/blob/master/include/uapi/linux/input-event-codes.h). (e.g. `keys: ["KEY_A", "KEY_B"];`)
+This is a required string/integer array/list field that defines the keys to be pressed/released. For a list of key/button strings, refer to [linux/input-event-codes.h](https://github.com/torvalds/linux/blob/master/include/uapi/linux/input-event-codes.h). (e.g. `keys: ["KEY_A", "KEY_B"];`). Alternatively, you may use integer keycodes to define the keys.
 
 Please note that these event codes work in a US (QWERTY) keyboard layout. If you have a locale set that does not use this keyboard layout, please map it to whatever key it would be on a QWERTY keyboard. (e.g. "KEY_Z" on a QWERTZ layout should be "KEY_Y")
 
@@ -106,6 +106,9 @@ e.g. `gestures: ( { gesture object }, { gesture object } ... );`
 
 #### direction
 This is a required string field in a gesture object that defines the direction of the gesture. (e.g. `direction: "Up"`)
+
+#### threshold
+This is an optional integer field that determines the number of pixels at which a gesture should activate. (e.g. `threshold: 50`). This value must be greater than 0. If not set or set to an invalid value, the threshold will default to 50 pixels.
 
 #### mode
 This is an optional string field that defines the mode of the gesture. This field defaults to `OnRelease` if it is omitted.
@@ -136,9 +139,28 @@ This action cycles between the given DPIs.
 ### dpis
 This is a mandatory integer array field that defines what DPIs to cycle through. (e.g. `dpis: [800, 1000, 1200];`)
 
+### sensor
+This is an optional field that will determine what sensor the DPI will switch on. This value defaults to 0. In almost all cases, this does not need to be used.
+
 ## ChangeDPI
-This action increments the DPI by the value given in the `inc` field.
+This action increments the DPI by the value given in the `inc`.
 
 ### inc
 This is an integer array field that defines what to increase the DPI by.
 
+### sensor
+See the CycleDPI `sensor` field.
+
+# Miscellaneous
+
+### workers
+This is an optional field that determines the number of worker threads that logid's workqueue uses. (e.g. `workers = 4;`)
+
+This defaults to 4 if no value is given.
+
+**Warning:** Decreasing the worker thread count is likely to result in reduced performance and counter-intuitively, more threads being created (since the workqueue will run a task in a new thread if it is busy for more than 500ms).
+
+### io_timeout
+This is an optional field that determines how how many milliseconds device I/O will wait for before timing out. (e.g. `timeout = 2000;`)
+
+This defaults to 2000 ms if left blank.
