@@ -14,7 +14,7 @@ DBus name pizza.pixl.LogiOps
 |  ├ deviceAdded() (signal, string)
 |  ├ deviceRemoved() (signal, string)
 |  └ devices (read, string[])
-├ /pizza/pixl/logiops/device/<nickname>
+├ /pizza/pixl/logiops/device/<#>
 |  ├ pizza.pixl.LogiOps.Device
 |  |  ├ reconfigure() (method, void)
 |  |  ├ reloadConfig() (method, void)
@@ -28,12 +28,12 @@ DBus name pizza.pixl.LogiOps
 |  |  ├ asleep (read, boolean)
 |  |  ├ supportedFeatures (read, string[])
 |  |  └ receiver (read, string) // empty if not a receiver device
-|  ├ /pizza/pixl/logiops/device/<nickname>/buttons/<cid>
+|  ├ /pizza/pixl/logiops/device/<#>/buttons/<cid>
 |  |  ├ pizza.pixl.LogiOps.Device.Button
 |  |  |  ├ remapButton(string actionType) (method, void)
 |  |  |  ├ actionType (read, string)
 |  |  |  ├ flags (read, string[])
-|  |  ├ /pizza/pixl/logiops/device/<nickname>/buttons/<cid>/gesture/<direction>
+|  |  ├ /pizza/pixl/logiops/device/<#>/buttons/<cid>/gesture/<direction>
 |  |  |  ├ pizza.pixl.LogiOps.Action.Gesture
 |  |  |  |  ├ setMode(string mode) (method, void)
 |  |  |	 |  ├ setAction(string, actionType) (method, void)
@@ -45,7 +45,7 @@ DBus name pizza.pixl.LogiOps
 |  |  |  ├ pizza.pixl.LogiOps.Action.Gesture.Axis
 |  |  |  |  ├ multiplier (read/write, double)
 |  |  |  |  └ axis (read/write, uint32)
-|  |  └ /pizza/pixl/logiops/device/<nickname>/buttons/<cid>[/gesture/<direction>]/action
+|  |  └ /pizza/pixl/logiops/device/<#>/buttons/<cid>[/gesture/<direction>]/action
 |  |     ├ pizza.pixl.LogiOps.Action.ChangeDPI
 |  |     |  ├ interval (read/write, int16)
 |  |     |  └ sensor (read/write, byte)
@@ -57,23 +57,23 @@ DBus name pizza.pixl.LogiOps
 |  |     |  └ sensor (read/write, byte)
 |  |     └ pizza.pixl.LogiOps.Action.Keypress
 |  |        └ keys (read/write, uint32[])
-|  ├ /pizza/pixl/logiops/device/<nickname>/dpi
+|  ├ /pizza/pixl/logiops/device/<#>/dpi
 |  |  └ pizza.pixl.LogiOps.DPI
 |  |     ├ getDPI(byte sensor) (method, uint16)
 |  |     ├ setDPI(byte sensor, uint16 dpi) (method, uint16)
 |  |     ├ sensorCount (read, byte)
 |  |     └ supportedDPIs (read, struct{uint16[], bool})
-|  ├ /pizza/pixl/logiops/device/<nickname>/hiresscroll
+|  ├ /pizza/pixl/logiops/device/<#>/hiresscroll
 |  |  └ pizza.pixl.LogiOps.HiresScroll
 |  |    ├ hires (read/write, byte) (0 for default, 1 for false, 2 for true)
 |  |    ├ inverted (read/write, byte)
 |  |    ├ target (read/write, byte)
-|  └ /pizza/pixl/logiops/device/<nickname>/smartshift
+|  └ /pizza/pixl/logiops/device/<#>/smartshift
 |     └ pizza.pixl.LogiOps.SmartShift
 |       ├ active (read/write, bool)
 |       ├ threshold (read/write, byte)
 |       └ defaultThreshold (read/write, byte)
-└ /pizza/pixl/logiops/receiver/<nickname>
+└ /pizza/pixl/logiops/receiver/<#>
    └ pizza.pixl.LogiOps.Receiver
      ├ pair(byte timeout) (method, void)
      ├ stopPairing() (method, void)
@@ -83,6 +83,6 @@ DBus name pizza.pixl.LogiOps
      └ devices (read, string[])
 ```
 
-## Nickname system
+## Nickname system (or <#> placeholder)
 
-I still haven't figured out this part, all I know is that I don't want the device name to refer to the raw path.
+Devices and receivers will be assigned a number starting from zero. When the device is disconnected, this number is freed. A connected device will always use the lowest available number
