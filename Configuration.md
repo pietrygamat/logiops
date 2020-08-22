@@ -78,7 +78,39 @@ This is an optional boolean field that defines whether the mouse wheel should be
 This is an optional boolean field that defines whether to invert the mouse wheel.
 
 #### target
-This is an optional boolean field that defines whether mousewheel events should send as an HID++ notification or work normally (`true` for HID++ notification, `false` for normal usage).
+This is an optional boolean field that defines whether mousewheel events should send as an HID++ notification or work normally (`true` for HID++ notification, `false` for normal usage). This option must be set to true to remap the scroll wheel action.
+
+#### up
+This is a gesture that defines the action that will be taken when the scroll wheel is moved up (down if inverted). Refer to the Actions/Gestures section for further info. To function, this field requires target to be enabled.
+
+### down
+This is a gesture that defines the action that will be taken when the scroll wheel is moved down (up if inverted). Refer to the Actions/Gestures section for further info. To function, this field requires target to be enabled.
+
+### thumbwheel
+This is an optional object field that defines the thumb wheel settings on a device that supports it (e.g. MX Master 3).
+
+Some devices will not support the proxy, touch, and tap fields. Thumb wheel capabilities can be determined by running logid in debug mode and looking at the output.
+
+#### divert
+This is a boolean field that determines whether the thumb wheel should be handled by logid (`true`) or the OS (`false`).
+
+#### invert
+This is a boolean field that determines whether the thumb wheel's scrolling should be diverted.
+
+#### left
+This is an optional gesture that defines the action that will be taken when the scroll wheel is moved left (right if inverted). Refer to the Actions/Gestures section for further info. To function, this field requires divert to be enabled.
+
+#### right
+This is an optional gesture that defines the action that will be taken when the scroll wheel is moved right (left if inverted). Refer to the Actions/Gestures section for further info. To function, this field requires divert to be enabled.
+
+#### proxy
+This is an optional action that defines what will occur when the user is in proximity of the thumb wheel. (will be pressed upon entering proximity, released upon leaving). Refer to the Actions section for further info.
+
+#### touch
+This is an optional action that defines what will occur when the user touches the thumb wheel. (will be pressed upon touching the thumb wheel, released upon letting go). Refer to the Actions section for further info.
+
+#### tap
+This is an optional action that defines what will occur when the user taps the thumb wheel once. (Pressed and immediately released after tap). Refer to the Actions section for further info.
 
 # Actions
 ### type
@@ -99,6 +131,8 @@ This action disables mouse movement while the button is pressed and allows you t
 
 Note that any button can be used as a gesture button if the device supports gestures.
 
+Additionally, some scroll wheels can have their up/down or left/right scrolls mapped to some gestures. Gesture modes will state their scroll wheel compatibility in the documentation.
+
 ### gestures
 This is a required array of gesture objects that map a direction to a gesture mode and an action.
 
@@ -116,13 +150,13 @@ This is an optional string field that defines the mode of the gesture. This fiel
 The following is a list of gesture modes:
 
 ##### NoPress
-This mode does nothing. The `action` field is ignored when this mode is used.
+This mode does nothing. The `action` field is ignored when this mode is used. This gesture is compatible with scroll wheels.
 ##### OnRelease
-This mode presses and releases an action when the gesture button is released
-##### OnFewPixels
-This mode presses and releases an action after the mouse is moved every n pixels (where n is the integer field `pixels`).
+This mode presses and releases an action when the gesture button is released. This gesture is not compatible with scroll wheels.
+##### OnInterval
+This mode presses and releases an action after the mouse is moved every n pixels (where n is the integer field `interval`). This gesture is compatible with scroll wheels.
 ##### Axis
-This mode maps a gesture movement to an axis. The axis is defined as a string (e.g. "REL_WHEEL") in the `axis` field and the multiplier for its movement is defined in the `axis_multiplier` field. For a list of axis strings, refer to [linux/input-event-codes.h](https://github.com/torvalds/linux/blob/master/include/uapi/linux/input-event-codes.h). 
+This mode maps a gesture movement to an axis. The axis is defined as a string (e.g. "REL_WHEEL") in the `axis` field and the multiplier for its movement is defined in the `axis_multiplier` field. For a list of axis strings, refer to [linux/input-event-codes.h](https://github.com/torvalds/linux/blob/master/include/uapi/linux/input-event-codes.h). This gesture is compatible with scroll wheels.
 
 #### action
 This is a mandatory field that defines the action the gesture uses. This can be any action other than `Gestures`. Refer to the entire Actions section for more details.
